@@ -27,6 +27,15 @@
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "otherModules": [],
-    "enableTranslation": false
+    "enableTranslation": false,
+    "gcpProjectId": "cloudcmr",
+    "gcpCloudSqlInstanceName": "cloudcmr:europe-west1:cloudcmr",
+    "gcpCloudSqlUserName": "root",
+    "gcpCloudSqlDatabaseName": "cloudcmr",
+    "gaeServiceName": "default",
+    "gaeLocation": "europe-west",
+    "gaeInstanceClass": "B1",
+    "gaeScalingType": "basic",
+    "gaeMaxInstances": "2"
   }
 }
