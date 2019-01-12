@@ -1,0 +1,32 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.cloudcmr.app"
+    },
+    "jhipsterVersion": "5.7.2",
+    "applicationType": "monolith",
+    "baseName": "cloudcmr",
+    "packageName": "com.cloudcmr.app",
+    "packageFolder": "com/cloudcmr/app",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZmQ2MjA5ZjQwODdmOTVkZGNlNTQyMjI5NzM3YWFiNmMwNTRlNzViYWI1YzlkMTNiODFmMDFkNmM3NDRjZWNkYjJlZWE3ZTQyOWJmN2VjMzdhMWFmNTdlYzdjN2I5OTBjZDAyNTBjNjg4YTNkZWRmMWZhMjJlNDA4MDJiZjQyY2M=",
+    "clientFramework": "react",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
