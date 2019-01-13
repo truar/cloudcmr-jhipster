@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "member",
+            "otherEntityName": "member",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "PhoneType",
+            "fieldValues": "PHONE,MOBILE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^0[0-9]*$"
+        }
+    ],
+    "changelogDate": "20190113120900",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "phone",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
