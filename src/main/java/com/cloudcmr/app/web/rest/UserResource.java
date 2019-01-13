@@ -81,7 +81,7 @@ public class UserResource {
      * The user needs to be activated on creation.
      *
      * @param userDTO the user to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new user, or with status 400 (Bad Request) if the login or email is already in use
+     * @return the ResponseEntity with getStatus 201 (Created) and with body the new user, or with getStatus 400 (Bad Request) if the login or email is already in use
      * @throws URISyntaxException if the Location URI syntax is incorrect
      * @throws BadRequestAlertException 400 (Bad Request) if the login or email is already in use
      */
@@ -111,7 +111,7 @@ public class UserResource {
      * PUT /users : Updates an existing User.
      *
      * @param userDTO the user to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated user
+     * @return the ResponseEntity with getStatus 200 (OK) and with body the updated user
      * @throws EmailAlreadyUsedException 400 (Bad Request) if the email is already in use
      * @throws LoginAlreadyUsedException 400 (Bad Request) if the login is already in use
      */
@@ -138,7 +138,7 @@ public class UserResource {
      * GET /users : get all users.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and with body all users
+     * @return the ResponseEntity with getStatus 200 (OK) and with body all users
      */
     @GetMapping("/users")
     @Timed
@@ -162,7 +162,7 @@ public class UserResource {
      * GET /users/:login : get the "login" user.
      *
      * @param login the login of the user to find
-     * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
+     * @return the ResponseEntity with getStatus 200 (OK) and with body the "login" user, or with getStatus 404 (Not Found)
      */
     @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @Timed
@@ -177,7 +177,7 @@ public class UserResource {
      * DELETE /users/:login : delete the "login" User.
      *
      * @param login the login of the user to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @return the ResponseEntity with getStatus 200 (OK)
      */
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @Timed

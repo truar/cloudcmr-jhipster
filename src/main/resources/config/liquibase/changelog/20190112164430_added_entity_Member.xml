@@ -23,35 +23,60 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="last_name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="email" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="birth_date" type="date">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="gender" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="usca_number" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_member_usca_number" />
+                <constraints nullable="true" />
             </column>
 
             <column name="jhi_comment" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
+            <column name="licence_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="licence_creation_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="subscription" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="season" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="is_ssf" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="member" columnName="licence_creation_date" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

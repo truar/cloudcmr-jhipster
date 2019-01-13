@@ -1,7 +1,20 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "addresses",
+            "otherEntityName": "address",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "member"
+        },
+        {
+            "relationshipName": "phones",
+            "otherEntityName": "phone",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "member"
+        }
+    ],
     "fields": [
         {
             "fieldName": "firstName",
@@ -35,6 +48,26 @@
         {
             "fieldName": "comment",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "licenceNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "licenceCreationDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "subscription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "season",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20190112164430",

@@ -69,8 +69,7 @@ describe('Entities reducer tests', () => {
       testMultipleTypes([REQUEST(ACTION_TYPES.FETCH_MEMBER_LIST), REQUEST(ACTION_TYPES.FETCH_MEMBER)], {}, state => {
         expect(state).toMatchObject({
           errorMessage: null,
-          updateSuccess: false,
-          loading: true
+          updateSuccess: false
         });
       });
     });

@@ -3,7 +3,7 @@ import {
   parseHeaderForLinks,
   loadMoreDataWhenScrolled,
   ICrudGetAction,
-  ICrudGetAllAction,
+  ICrudSearchAction,
   ICrudPutAction,
   ICrudDeleteAction
 } from 'react-jhipster';
@@ -15,7 +15,9 @@ import { IMember, defaultValue } from 'app/shared/model/member.model';
 
 export const ACTION_TYPES = {
   FETCH_MEMBER_LIST: 'member/FETCH_MEMBER_LIST',
+  SEARCH_MEMBER_LIST: 'member/SEARCH_MEMBER_LIST',
   FETCH_MEMBER: 'member/FETCH_MEMBER',
+  MEMBER_RESET: 'member/MEMBER_RESET',
   CREATE_MEMBER: 'member/CREATE_MEMBER',
   UPDATE_MEMBER: 'member/UPDATE_MEMBER',
   DELETE_MEMBER: 'member/DELETE_MEMBER',
@@ -40,6 +42,11 @@ export type MemberState = Readonly<typeof initialState>;
 export default (state: MemberState = initialState, action): MemberState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_MEMBER_LIST):
+      return {
+        ...state,
+        errorMessage: null,
+        updateSuccess: false
+      };
     case REQUEST(ACTION_TYPES.FETCH_MEMBER):
       return {
         ...state,
@@ -75,7 +82,18 @@ export default (state: MemberState = initialState, action): MemberState => {
         links,
         loading: false,
         totalItems: action.payload.headers['x-total-count'],
+        // TODO FIXME when searching. This is this line that is causing the NPE
         entities: loadMoreDataWhenScrolled(state.entities, action.payload.data, links)
+      };
+    case SUCCESS(ACTION_TYPES.SEARCH_MEMBER_LIST):
+      const links2 = parseHeaderForLinks(action.payload.headers.link);
+      return {
+        ...state,
+        links: links2,
+        loading: false,
+        totalItems: action.payload.headers['x-total-count'],
+        // TODO FIXME when searching. This is this line that is causing the NPE
+        entities: loadMoreDataWhenScrolled([], action.payload.data, links2)
       };
     case SUCCESS(ACTION_TYPES.FETCH_MEMBER):
       return {
@@ -98,6 +116,11 @@ export default (state: MemberState = initialState, action): MemberState => {
         updateSuccess: true,
         entity: {}
       };
+    case ACTION_TYPES.MEMBER_RESET:
+      return {
+        ...state,
+        entity: defaultValue
+      };
     case ACTION_TYPES.RESET:
       return {
         ...initialState
@@ -111,10 +134,18 @@ const apiUrl = 'api/members';
 
 // Actions
 
-export const getEntities: ICrudGetAllAction<IMember> = (page, size, sort) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+export const getEntities: ICrudSearchAction<IMember> = (search, page, size, sort) => {
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&searchText=${search}` : ''}`;
   return {
     type: ACTION_TYPES.FETCH_MEMBER_LIST,
+    payload: axios.get<IMember>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`)
+  };
+};
+
+export const searchEntities: ICrudSearchAction<IMember> = (search, page, size, sort) => {
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&searchText=${search}` : ''}`;
+  return {
+    type: ACTION_TYPES.SEARCH_MEMBER_LIST,
     payload: axios.get<IMember>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`)
   };
 };
@@ -151,6 +182,10 @@ export const deleteEntity: ICrudDeleteAction<IMember> = id => async dispatch => 
   });
   return result;
 };
+
+export const resetEntity = () => ({
+  type: ACTION_TYPES.MEMBER_RESET
+});
 
 export const reset = () => ({
   type: ACTION_TYPES.RESET

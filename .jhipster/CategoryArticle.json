@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "categoryArticle"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190216181125",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "category_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

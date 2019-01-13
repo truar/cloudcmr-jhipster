@@ -5,8 +5,8 @@ import { Switch } from 'react-router-dom';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 import Member from './member';
-import Phone from './phone';
-import Address from './address';
+import Article from './article';
+import CategoryArticle from './category-article';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -14,8 +14,8 @@ const Routes = ({ match }) => (
     <Switch>
       {/* prettier-ignore */}
       <ErrorBoundaryRoute path={`${match.url}/member`} component={Member} />
-      <ErrorBoundaryRoute path={`${match.url}/phone`} component={Phone} />
-      <ErrorBoundaryRoute path={`${match.url}/address`} component={Address} />
+      <ErrorBoundaryRoute path={`${match.url}/article`} component={Article} />
+      <ErrorBoundaryRoute path={`${match.url}/category-article`} component={CategoryArticle} />
       {/* jhipster-needle-add-route-path - JHipster will routes here */}
     </Switch>
   </div>

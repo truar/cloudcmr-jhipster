@@ -2,14 +2,14 @@ import './header.css';
 
 import React from 'react';
 
-import { Navbar, Nav, NavbarToggler, NavbarBrand, Collapse } from 'reactstrap';
+import { Navbar, Nav, NavbarToggler, NavbarBrand, Collapse, DropdownItem, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { NavLink as Link } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 
-import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu } from './menus';
+import { Home, Brand, NavDropdown } from './header-components';
+import { AdminMenu, EntitiesMenu, AccountMenu, BaseArticleMenu, SellingMenu } from './menus';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -54,6 +54,16 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
           <Collapse isOpen={this.state.menuOpen} navbar>
             <Nav id="header-tabs" className="ml-auto" navbar>
               <Home />
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink href="/#/adherents">
+                    <FontAwesomeIcon icon="user" fixedWidth />
+                    &nbsp; Gestion des adhérents
+                  </NavLink>
+                </NavItem>
+              )}
+              {isAuthenticated && <SellingMenu />}
+              {isAuthenticated && isAdmin && <BaseArticleMenu />}
               {isAuthenticated && <EntitiesMenu />}
               {isAuthenticated && isAdmin && <AdminMenu showSwagger={isSwaggerEnabled} showDatabase={!isInProduction} />}
               <AccountMenu isAuthenticated={isAuthenticated} />

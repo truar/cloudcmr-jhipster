@@ -6,6 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons/faDollarSign';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { faHdd } from '@fortawesome/free-solid-svg-icons/faHdd';
@@ -28,6 +29,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
+import { faDonate } from '@fortawesome/free-solid-svg-icons/faDonate';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -41,6 +43,7 @@ export const loadIcons = () => {
     faArrowLeft,
     faSave,
     faPlus,
+    faDollarSign,
     faPencilAlt,
     faUser,
     faTachometerAlt,
@@ -62,6 +65,7 @@ export const loadIcons = () => {
     faRoad,
     faCloud,
     faTimesCircle,
-    faSearch
+    faSearch,
+    faDonate
   );
 };

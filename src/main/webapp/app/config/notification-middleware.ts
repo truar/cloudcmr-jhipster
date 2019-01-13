@@ -34,68 +34,70 @@ export default () => next => action => {
       return Promise.resolve(response);
     })
     .catch(error => {
-      if (action.meta && action.meta.errorMessage) {
-        toast.error(action.meta.errorMessage);
-      } else if (error && error.response) {
-        const response = error.response;
-        const data = response.data;
-        if (!(response.status === 401 && (error.message === '' || (data && data.path && data.path.includes('/api/account'))))) {
-          let i;
-          switch (response.status) {
-            // connection refused, server not reachable
-            case 0:
-              addErrorAlert('Server not reachable', 'error.server.not.reachable');
-              break;
+      if ((action.meta && action.meta.disable && action.meta.disable !== true) || (action.meta && !action.meta.disable) || !action.meta) {
+        if (action.meta && action.meta.errorMessage) {
+          toast.error(action.meta.errorMessage);
+        } else if (error && error.response) {
+          const response = error.response;
+          const data = response.data;
+          if (!(response.status === 401 && (error.message === '' || (data && data.path && data.path.includes('/api/account'))))) {
+            let i;
+            switch (response.status) {
+              // connection refused, server not reachable
+              case 0:
+                addErrorAlert('Server not reachable', 'error.server.not.reachable');
+                break;
 
-            case 400:
-              const headers = Object.entries(response.headers);
-              let errorHeader = null;
-              let entityKey = null;
-              headers.forEach(([k, v]: [string, string]) => {
-                if (k.toLowerCase().endsWith('app-error')) {
-                  errorHeader = v;
-                } else if (k.toLowerCase().endsWith('app-params')) {
-                  entityKey = v;
-                }
-              });
-              if (errorHeader) {
-                const entityName = entityKey;
-                addErrorAlert(errorHeader, errorHeader, { entityName });
-              } else if (data !== '' && data.fieldErrors) {
-                const fieldErrors = data.fieldErrors;
-                for (i = 0; i < fieldErrors.length; i++) {
-                  const fieldError = fieldErrors[i];
-                  if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
-                    fieldError.message = 'Size';
+              case 400:
+                const headers = Object.entries(response.headers);
+                let errorHeader = null;
+                let entityKey = null;
+                headers.forEach(([k, v]: [string, string]) => {
+                  if (k.toLowerCase().endsWith('app-error')) {
+                    errorHeader = v;
+                  } else if (k.toLowerCase().endsWith('app-params')) {
+                    entityKey = v;
                   }
-                  // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
-                  const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
-                  const fieldName = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
-                  addErrorAlert(`Error on field "${fieldName}"`, `error.${fieldError.message}`, { fieldName });
+                });
+                if (errorHeader) {
+                  const entityName = entityKey;
+                  addErrorAlert(errorHeader, errorHeader, { entityName });
+                } else if (data !== '' && data.fieldErrors) {
+                  const fieldErrors = data.fieldErrors;
+                  for (i = 0; i < fieldErrors.length; i++) {
+                    const fieldError = fieldErrors[i];
+                    if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
+                      fieldError.message = 'Size';
+                    }
+                    // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
+                    const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
+                    const fieldName = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
+                    addErrorAlert(`Error on field "${fieldName}"`, `error.${fieldError.message}`, { fieldName });
+                  }
+                } else if (data !== '' && data.message) {
+                  addErrorAlert(data.message, data.message, data.params);
+                } else {
+                  addErrorAlert(data);
                 }
-              } else if (data !== '' && data.message) {
-                addErrorAlert(data.message, data.message, data.params);
-              } else {
-                addErrorAlert(data);
-              }
-              break;
+                break;
 
-            case 404:
-              addErrorAlert('Not found', 'error.url.not.found');
-              break;
+              case 404:
+                addErrorAlert('Not found', 'error.url.not.found');
+                break;
 
-            default:
-              if (data !== '' && data.message) {
-                addErrorAlert(data.message);
-              } else {
-                addErrorAlert(data);
-              }
+              default:
+                if (data !== '' && data.message) {
+                  addErrorAlert(data.message);
+                } else {
+                  addErrorAlert(data);
+                }
+            }
           }
+        } else if (error && error.message) {
+          toast.error(error.message);
+        } else {
+          toast.error('Unknown error!');
         }
-      } else if (error && error.message) {
-        toast.error(error.message);
-      } else {
-        toast.error('Unknown error!');
       }
       return Promise.reject(error);
     });

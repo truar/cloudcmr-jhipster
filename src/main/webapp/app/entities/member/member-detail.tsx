@@ -58,6 +58,28 @@ export class MemberDetail extends React.Component<IMemberDetailProps> {
               <span id="comment">Comment</span>
             </dt>
             <dd>{memberEntity.comment}</dd>
+            <dt>
+              <span id="licenceNumber">Licence Number</span>
+            </dt>
+            <dd>{memberEntity.licenceNumber}</dd>
+            <dt>
+              <span id="licenceCreationDate">Licence Creation Date</span>
+            </dt>
+            <dd>
+              <TextFormat value={memberEntity.licenceCreationDate} type="date" format={APP_DATE_FORMAT} />
+            </dd>
+            <dt>
+              <span id="subscription">Subscription</span>
+            </dt>
+            <dd>{memberEntity.subscription}</dd>
+            <dt>
+              <span id="email2">Email 2</span>
+            </dt>
+            <dd>{memberEntity.email2}</dd>
+            <dt>
+              <span id="season">Season</span>
+            </dt>
+            <dd>{memberEntity.season}</dd>
           </dl>
           <Button tag={Link} to="/entity/member" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

@@ -8,8 +8,12 @@
     <include file="config/liquibase/changelog/20190112164430_added_entity_Member.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190113120900_added_entity_Phone.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190113122428_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190216175609_added_entity_Article.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190216181125_added_entity_CategoryArticle.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190113120900_added_entity_constraints_Phone.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190113122428_added_entity_constraints_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/21090219200523_add_category_article_data.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/201900322112211_add_domain_sales.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

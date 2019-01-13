@@ -9,6 +9,9 @@ const adminMenuItems = (
     <DropdownItem tag={Link} to="/admin/user-management">
       <FontAwesomeIcon icon="user" fixedWidth /> User management
     </DropdownItem>
+    <DropdownItem tag={Link} to="/admin/ffs">
+      <FontAwesomeIcon icon="user" fixedWidth /> FFS
+    </DropdownItem>
     <DropdownItem tag={Link} to="/admin/metrics">
       <FontAwesomeIcon icon="tachometer-alt" fixedWidth /> Metrics
     </DropdownItem>

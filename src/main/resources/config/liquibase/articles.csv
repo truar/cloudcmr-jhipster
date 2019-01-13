@@ -1,0 +1,12 @@
+id;code;description;price;start_date;end_date;jhi_comment;category_id
+1;1A;Forfait1;10.00;null;null;;5
+2;2A;Forfait2;20.00;null;null;;5
+3;3A;Opinel;30.00;null;null;;13
+4;4A;Cours1;10.00;null;null;;4
+5;5A;Forfait5;10.00;null;null;;5
+6;6A;Forfait6;10.00;null;null;;5
+7;7A;Forfait7;10.00;null;null;;7
+8;8A;Forfait8;10.00;null;null;;5
+9;9A;Forfait saison;150.00;null;null;;6
+10;10A;FFS Famille 202010;100.00;null;null;;2
+11;11A;FFS Famille 2019;230.00;null;null;;1

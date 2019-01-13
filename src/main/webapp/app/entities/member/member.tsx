@@ -3,12 +3,13 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
+import debounce from 'lodash/debounce';
 // tslint:disable-next-line:no-unused-variable
 import { ICrudGetAllAction, TextFormat, getSortState, IPaginationBaseState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities, reset } from './member.reducer';
+import { getEntities, searchEntities, reset } from './member.reducer';
 import { IMember } from 'app/shared/model/member.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -16,11 +17,24 @@ import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
 export interface IMemberProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export type IMemberState = IPaginationBaseState;
+export interface ISearchAndPAginateBaseState extends IPaginationBaseState {
+  search: '';
+}
+
+export type IMemberState = ISearchAndPAginateBaseState;
 
 export class Member extends React.Component<IMemberProps, IMemberState> {
   state: IMemberState = {
-    ...getSortState(this.props.location, ITEMS_PER_PAGE)
+    ...getSortState(this.props.location, ITEMS_PER_PAGE),
+    search: ''
+  };
+
+  debouncedSearchEntities = debounce(() => {
+    this.searchEntities();
+  }, 500);
+
+  handleChange = event => {
+    this.setState({ search: event.target.value, activePage: 1 }, () => this.debouncedSearchEntities());
   };
 
   componentDidMount() {
@@ -41,9 +55,7 @@ export class Member extends React.Component<IMemberProps, IMemberState> {
   };
 
   handleLoadMore = () => {
-    if (window.pageYOffset > 0) {
-      this.setState({ activePage: this.state.activePage + 1 }, () => this.getEntities());
-    }
+    this.setState({ activePage: this.state.activePage + 1 }, () => this.getEntities());
   };
 
   sort = prop => () => {
@@ -59,8 +71,13 @@ export class Member extends React.Component<IMemberProps, IMemberState> {
   };
 
   getEntities = () => {
-    const { activePage, itemsPerPage, sort, order } = this.state;
-    this.props.getEntities(activePage - 1, itemsPerPage, `${sort},${order}`);
+    const { search, activePage, itemsPerPage, sort, order } = this.state;
+    this.props.getEntities(search, activePage - 1, itemsPerPage, `${sort},${order}`);
+  };
+
+  searchEntities = () => {
+    const { search, itemsPerPage, sort, order } = this.state;
+    this.props.searchEntities(search, 0, itemsPerPage, `${sort},${order}`);
   };
 
   render() {
@@ -68,12 +85,13 @@ export class Member extends React.Component<IMemberProps, IMemberState> {
     return (
       <div>
         <h2 id="member-heading">
-          Members
+          Gestion des adhérents
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create new Member
+            &nbsp; Créer un nouvel adhérent
           </Link>
         </h2>
+        <input type="text" name="search" placeholder="Recherche..." value={this.state.search} onChange={this.handleChange} />
         <div className="table-responsive">
           <InfiniteScroll
             pageStart={this.state.activePage}
@@ -110,12 +128,27 @@ export class Member extends React.Component<IMemberProps, IMemberState> {
                   <th className="hand" onClick={this.sort('comment')}>
                     Comment <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th className="hand" onClick={this.sort('licenceNumber')}>
+                    Licence Number <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={this.sort('licenceCreationDate')}>
+                    Licence Creation Date <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={this.sort('subscription')}>
+                    Subscription <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={this.sort('email2')}>
+                    Email 2 <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={this.sort('season')}>
+                    Season <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
               <tbody>
                 {memberList.map((member, i) => (
-                  <tr key={`entity-${i}`}>
+                  <tr key={`member-${i}`}>
                     <td>
                       <Button tag={Link} to={`${match.url}/${member.id}`} color="link" size="sm">
                         {member.id}
@@ -130,6 +163,13 @@ export class Member extends React.Component<IMemberProps, IMemberState> {
                     <td>{member.gender}</td>
                     <td>{member.uscaNumber}</td>
                     <td>{member.comment}</td>
+                    <td>{member.licenceNumber}</td>
+                    <td>
+                      <TextFormat type="date" value={member.licenceCreationDate} format={APP_DATE_FORMAT} />
+                    </td>
+                    <td>{member.subscription}</td>
+                    <td>{member.email2}</td>
+                    <td>{member.season}</td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`${match.url}/${member.id}`} color="info" size="sm">
@@ -164,6 +204,7 @@ const mapStateToProps = ({ member }: IRootState) => ({
 
 const mapDispatchToProps = {
   getEntities,
+  searchEntities,
   reset
 };
 

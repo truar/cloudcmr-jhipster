@@ -54,7 +54,7 @@ public class ExceptionTranslatorTestController {
         throw new BadCredentialsException("test authentication failed!");
     }
 
-    @GetMapping("/test/response-status")
+    @GetMapping("/test/response-getStatus")
     public void exceptionWithReponseStatus() {
         throw new TestResponseStatusException();
     }
@@ -78,7 +78,7 @@ public class ExceptionTranslatorTestController {
         }
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "test response status")
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "test response getStatus")
     @SuppressWarnings("serial")
     public static class TestResponseStatusException extends RuntimeException {
     }

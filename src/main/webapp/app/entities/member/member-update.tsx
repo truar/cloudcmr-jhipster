@@ -41,6 +41,8 @@ export class MemberUpdate extends React.Component<IMemberUpdateProps, IMemberUpd
   }
 
   saveEntity = (event, errors, values) => {
+    values.licenceCreationDate = new Date(values.licenceCreationDate);
+
     if (errors.length === 0) {
       const { memberEntity } = this.props;
       const entity = {
@@ -131,6 +133,42 @@ export class MemberUpdate extends React.Component<IMemberUpdateProps, IMemberUpd
                     Comment
                   </Label>
                   <AvField id="member-comment" type="text" name="comment" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="licenceNumberLabel" for="licenceNumber">
+                    Licence Number
+                  </Label>
+                  <AvField id="member-licenceNumber" type="text" name="licenceNumber" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="licenceCreationDateLabel" for="licenceCreationDate">
+                    Licence Creation Date
+                  </Label>
+                  <AvInput
+                    id="member-licenceCreationDate"
+                    type="datetime-local"
+                    className="form-control"
+                    name="licenceCreationDate"
+                    value={isNew ? null : convertDateTimeFromServer(this.props.memberEntity.licenceCreationDate)}
+                  />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="subscriptionLabel" for="subscription">
+                    Subscription
+                  </Label>
+                  <AvField id="member-subscription" type="text" name="subscription" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="email2Label" for="email2">
+                    Email 2
+                  </Label>
+                  <AvField id="member-email2" type="text" name="email2" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="seasonLabel" for="season">
+                    Season
+                  </Label>
+                  <AvField id="member-season" type="string" className="form-control" name="season" />
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/member" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />

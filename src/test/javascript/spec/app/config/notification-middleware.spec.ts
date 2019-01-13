@@ -102,6 +102,13 @@ describe('Notification Middleware', () => {
       }
     })
   };
+  const DEFAULT_ERROR_NO_NOTIF = {
+    type: ERROR_TYPE,
+    meta: {
+      disable: true
+    },
+    payload: Promise.reject(new Error('foo'))
+  };
 
   const makeStore = () => applyMiddleware(notificationMiddleware, promiseMiddleware())(createStore)(() => null);
 
@@ -186,5 +193,12 @@ describe('Notification Middleware', () => {
     });
     const toastMsg = (toastify.toast as any).error.getCall(0).args[0];
     expect(toastMsg).toContain('foo.creation');
+  });
+
+  it('should trigger an error but not display a toast message and return promise error', async () => {
+    await store.dispatch(DEFAULT_ERROR_NO_NOTIF).catch(err => {
+      expect(err.message).toEqual('foo');
+    });
+    expect((toastify.toast as any).error.called).toEqual(false);
   });
 });

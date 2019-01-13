@@ -178,7 +178,7 @@ public class UserServiceIntTest {
     @Test
     @Transactional
     public void testRemoveNotActivatedUsers() {
-        // custom "now" for audit to use as creation date
+        // custom "NOW" for audit to use as creation date
         when(dateTimeProvider.getNow()).thenReturn(Optional.of(Instant.now().minus(30, ChronoUnit.DAYS)));
 
         user.setActivated(false);

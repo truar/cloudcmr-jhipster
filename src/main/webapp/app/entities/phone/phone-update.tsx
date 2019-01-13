@@ -44,7 +44,6 @@ export class PhoneUpdate extends React.Component<IPhoneUpdateProps, IPhoneUpdate
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
-
     this.props.getMembers();
   }
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity SoldArticle.
+    -->
+    <changeSet id="20190322112211-1" author="truaro">
+        <createTable tableName="sold_article">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="member_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="article_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="true" />
+            </column>
+            <column name="sale_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="payer">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="member_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_type" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="sale">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+            <column name="payer_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payer2_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="sales_session_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="sales_session">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cash_when_new" type="decimal(5,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cash_when_closed" type="decimal(5,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="seller_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="running_sale_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

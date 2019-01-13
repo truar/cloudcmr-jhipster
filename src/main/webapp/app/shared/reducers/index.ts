@@ -23,6 +23,15 @@ import phone, {
 import address, {
   AddressState
 } from 'app/entities/address/address.reducer';
+// prettier-ignore
+import article, {
+  ArticleState
+} from 'app/modules/baseArticle/article/article.reducer';
+// prettier-ignore
+import categoryArticle, {
+  CategoryArticleState
+} from 'app/modules/baseArticle/category-article/category-article.reducer';
+import sellings, { SellingsState } from 'app/modules/sellings/sellings.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -38,6 +47,9 @@ export interface IRootState {
   readonly member: MemberState;
   readonly phone: PhoneState;
   readonly address: AddressState;
+  readonly article: ArticleState;
+  readonly categoryArticle: CategoryArticleState;
+  readonly sellings: SellingsState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -55,6 +67,9 @@ const rootReducer = combineReducers<IRootState>({
   member,
   phone,
   address,
+  article,
+  categoryArticle,
+  sellings,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

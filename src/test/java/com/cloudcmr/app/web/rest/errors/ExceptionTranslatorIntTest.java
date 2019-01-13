@@ -131,11 +131,11 @@ public class ExceptionTranslatorIntTest {
 
     @Test
     public void testExceptionWithResponseStatus() throws Exception {
-        mockMvc.perform(get("/test/response-status"))
+        mockMvc.perform(get("/test/response-getStatus"))
             .andExpect(status().isBadRequest())
             .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
             .andExpect(jsonPath("$.message").value("error.http.400"))
-            .andExpect(jsonPath("$.title").value("test response status"));
+            .andExpect(jsonPath("$.title").value("test response getStatus"));
     }
 
     @Test

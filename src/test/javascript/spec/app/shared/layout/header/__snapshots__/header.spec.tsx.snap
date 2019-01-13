@@ -56,6 +56,36 @@ exports[`Header Renders a Header component in dev profile with LoadingBar, Navba
         vertical={false}
       >
         <Component />
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            href="/#/adherents"
+            tag="a"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={true}
+              flip={null}
+              icon="user"
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+              Gestion des adhérents
+          </NavLink>
+        </NavItem>
+        <Component />
+        <Component />
         <Component />
         <Component
           showDatabase={true}
@@ -116,6 +146,36 @@ exports[`Header Renders a Header component in prod profile with LoadingBar, Navb
         tag="ul"
         vertical={false}
       >
+        <Component />
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            href="/#/adherents"
+            tag="a"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={true}
+              flip={null}
+              icon="user"
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+              Gestion des adhérents
+          </NavLink>
+        </NavItem>
+        <Component />
         <Component />
         <Component />
         <Component
