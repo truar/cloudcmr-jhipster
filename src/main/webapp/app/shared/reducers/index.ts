@@ -19,6 +19,10 @@ import member, {
 import phone, {
   PhoneState
 } from 'app/entities/phone/phone.reducer';
+// prettier-ignore
+import address, {
+  AddressState
+} from 'app/entities/address/address.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -33,6 +37,7 @@ export interface IRootState {
   readonly settings: SettingsState;
   readonly member: MemberState;
   readonly phone: PhoneState;
+  readonly address: AddressState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -49,6 +54,7 @@ const rootReducer = combineReducers<IRootState>({
   settings,
   member,
   phone,
+  address,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
