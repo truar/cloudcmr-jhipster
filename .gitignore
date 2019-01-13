@@ -142,3 +142,9 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Production file
+######################
+src/main/resources/config/application-prod-gae.yml
+src/main/resources/config/application-prod.yml

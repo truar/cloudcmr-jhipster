@@ -13,8 +13,8 @@
 spring:
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://google/cloudcmr?cloudSqlInstance=cloudcmr:europe-west1:cloudcmr&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
-        username: cloudcmr
-        password: cloudcmr
+        url: <url>
+        username: <username>
+        password: <password>
         hikari:
             maximumPoolSize: 8
